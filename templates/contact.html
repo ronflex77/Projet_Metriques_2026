@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Projet Image to Cluster</title>
+    <style>
+        :root {
+            --bg: #05080a;
+            --card-bg: rgba(10, 15, 20, 0.8);
+            --blue: #00d2ff;
+            --green: #3affaa;
+            --text: #e0e0e0;
+            --border: rgba(58, 255, 170, 0.2);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', system-ui, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* --- Effets de lumière en arrière-plan --- */
+        .light-blob {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: 0;
+            opacity: 0.15;
+            animation: drift 20s infinite alternate ease-in-out;
+        }
+        .blue { background: var(--blue); top: -10%; left: -10%; }
+        .green { background: var(--green); bottom: -10%; right: -10%; animation-delay: -5s; }
+
+        @keyframes drift {
+            from { transform: translate(0, 0) scale(1); }
+            to { transform: translate(100px, 50px) scale(1.1); }
+        }
+
+        /* --- Carte de contact --- */
+        .contact-card {
+            position: relative;
+            z-index: 1;
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border);
+            padding: 3rem;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 2rem;
+            background: linear-gradient(to right, var(--blue), var(--green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            letter-spacing: -1px;
+        }
+
+        .user-info {
+            text-align: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
+        }
+
+        .user-info span {
+            display: block;
+            font-size: 1.1rem;
+            color: var(--green);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* --- Formulaire --- */
+        .field { margin-bottom: 1.5rem; }
+        
+        label {
+            display: block;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+            color: rgba(255,255,255,0.6);
+        }
+
+        input, textarea {
+            width: 100%;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 12px;
+            color: white;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--blue);
+            background: rgba(0, 210, 255, 0.05);
+        }
+
+        button {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 12px;
+            border: none;
+            background: linear-gradient(to right, var(--blue), var(--green));
+            color: #05080a;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(58, 255, 170, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="light-blob blue"></div>
+    <div class="light-blob green"></div>
+
+    <div class="contact-card">
+        <div class="user-info">
+            <span>RONFLEX 77</span>
+            <small style="color: grey;">Étudiant DevOps</small>
+        </div>
+        
+        <h2>Contactez-moi</h2>
+        
+        <form>
+            <div class="field">
+                <label>VOTRE EMAIL</label>
+                <input type="email" placeholder="email@exemple.com">
+            </div>
+            <div class="field">
+                <label>MESSAGE</label>
+                <textarea rows="4" placeholder="Parlons de Kubernetes..."></textarea>
+            </div>
+            <button type="button">Envoyer le signal</button>
+        </form>
+    </div>
+
+</body>
+</html>

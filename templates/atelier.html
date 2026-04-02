@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Métrologie - Hyères</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background: #f4f7f6; }
+        .card { background: white; padding: 2rem; border-radius: 12px; shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center; }
+        .chart-container { width: 350px; height: 350px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2>Ensoleillement à Hyères</h2>
+        <p>Répartition sur 24 heures (Aujourd'hui)</p>
+        
+        <div class="chart-container">
+            <canvas id="donutChart"></canvas>
+        </div>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('donutChart').getContext('2d');
+        
+        // Injection des variables Flask dans le JavaScript
+        const sunHours = {{ sun }};
+        const restHours = {{ other }};
+
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Heures de Soleil', 'Nuit / Nuages'],
+                datasets: [{
+                    data: [sunHours, restHours],
+                    backgroundColor: [
+                        '#FFCE56', // Jaune soleil
+                        '#36A2EB'  // Bleu ciel/obscurité
+                    ],
+                    hoverOffset: 15,
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom' }
+                },
+                cutout: '70%' // Transforme le camembert en anneau (Donut)
+            }
+        });
+    </script>
+</body>
+</html>

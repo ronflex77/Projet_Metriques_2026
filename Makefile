@@ -5,7 +5,7 @@ FLASK  := $(VENV)/bin/flask
 
 APP    := app.py
 HOST   := 0.0.0.0
-PORT   := 5000
+PORT   := 5001
 
 .DEFAULT_GOAL := help
 
